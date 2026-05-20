@@ -10,6 +10,11 @@ public class Summarizer implements NumberRangeSummarizer
     @Override
     public Collection<Integer> collect(String input)
     {
+        if (input == null || input.isEmpty())
+        {
+            return Collections.emptyList();
+        }
+
         String[] inputList = input.split(",");
         List<Integer> numberList = new LinkedList<>();
 
@@ -29,34 +34,36 @@ public class Summarizer implements NumberRangeSummarizer
     @Override
     public String summarizeCollection(Collection<Integer> input)
     {
+        if(input == null || input.isEmpty())
+        {
+            return "";
+        }
+
         List<Integer> inputList = new LinkedList<>(input);
         StringBuilder result = new StringBuilder();
-        int floor = inputList.get(0);
-        boolean inRange = false;
+        int floor;
 
         for (int i = 0; i < inputList.size(); i++)
         {
             int curr = inputList.get(i);
+            floor = curr;
+            result.append(floor);
 
-            if(i < inputList.size()-1 && curr+1 == inputList.get(i+1))
+            while(i < inputList.size() - 1 && curr + 1 == inputList.get(i+1))
             {
-                if (!inRange) {
-                    inRange = true;
-                    floor = curr;
-                }
-            }
-            else if (inRange)
-            {
-                inRange = false;
-                result.append(floor).append("-").append(curr);
-            }
-            else
-            {
-                result.append(curr);
+                curr = inputList.get(i+1);
+                i++;
             }
 
-            if(i < inputList.size()-1 && !inRange)
+            if (floor != curr)
+            {
+                result.append("-").append(curr);
+            }
+
+            if (i < inputList.size() - 1)
+            {
                 result.append(", ");
+            }
         }
 
         return result.toString();
