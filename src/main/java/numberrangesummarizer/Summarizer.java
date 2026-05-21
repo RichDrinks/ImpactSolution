@@ -37,7 +37,8 @@ public class Summarizer implements NumberRangeSummarizer
                 }
             } catch (NumberFormatException e)
             {
-                throw new IllegalArgumentException("Invalid integer: '" + num + "'. Proceeding without this value.",e);
+//                System.err.println("Invalid integer: '" + num + "'. Proceeding without number.");
+                throw new IllegalArgumentException("Invalid integer: '" + num + "'",e);
             }
         }
         return numberList;

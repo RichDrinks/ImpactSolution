@@ -12,6 +12,15 @@ into a range.
 - whitespaces
 - empty/null cases
 
+## Assumptions
+
+- Input can contain an unsorted list of numbers.
+- Input can contain duplicated numbers.
+- Input can contain whitespaces.
+- Duplicate numbers are removed rather than listing twice in summary (i.e. 1,2,3,1 returns 1-3 rather than 1,1-3).
+- Invalid integer inputs are caught and an illegalArgumentException is thrown. Can be altered to rather log an error with the invalid value which will allow program to continue without the invalid value. (Commented code - will also need to change unit test).
+- Exceeding Max integer value is caught under an IllegalArgumentException.
+
 ## To Run
 
 Source files can be found under <code>src/main/java/numberrangesummarizer</code> and 
