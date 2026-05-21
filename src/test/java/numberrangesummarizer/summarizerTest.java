@@ -77,4 +77,19 @@ public class summarizerTest
         String expectedResult = "10, 15-16, 18, 20-23, 25";
         assertEquals(expectedResult,sum.summarizeCollection(sum.collect(input)));
     }
+
+    @Test
+    @DisplayName("Handle strings with invalid integers/elements")
+    public void testInvalidCase()
+    {
+        String input1 = "2,5,six,7,10,11,abc,99999999999";
+        String input2 = "one,two,three";
+
+        String expectedResult1 = "2, 5, 7, 10-11";
+        String expectedResult2 = "";
+
+        assertEquals(expectedResult1,sum.summarizeCollection(sum.collect(input1)));
+        assertEquals(expectedResult2,sum.summarizeCollection(sum.collect(input2)));
+    }
+
 }
