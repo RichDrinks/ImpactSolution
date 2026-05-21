@@ -22,12 +22,13 @@ public class Summarizer implements NumberRangeSummarizer
         {
             try
             {
-                numberList.add(Integer.parseInt(num));
+                numberList.add(Integer.parseInt(num.strip()));
             } catch (NumberFormatException e)
             {
                 System.out.println("Could not convert '" + num + "' to a valid integer. Proceeding without this value.");
             }
         }
+        Collections.sort(numberList);
         return numberList;
     }
 
@@ -49,7 +50,7 @@ public class Summarizer implements NumberRangeSummarizer
             floor = curr;
             result.append(floor);
 
-            while(i < inputList.size() - 1 && curr + 1 == inputList.get(i+1))
+            while(i < inputList.size() - 1 && (curr + 1 == inputList.get(i+1) || curr == inputList.get(i+1)))
             {
                 curr = inputList.get(i+1);
                 i++;
