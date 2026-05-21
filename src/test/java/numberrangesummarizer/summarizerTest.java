@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,12 +22,15 @@ public class summarizerTest
     @DisplayName("Correctly collect and summarize the given example input and negative integer input")
     public void testBaseCase()
     {
-        // Example Case
         String input = "1,3,6,7,8,12,13,14,15,21,22,23,24,31";
         String expectedResult = "1, 3, 6-8, 12-15, 21-24, 31";
         assertEquals(expectedResult,sum.summarizeCollection(sum.collect(input)));
+    }
 
-        //Negative Case
+    @Test
+    @DisplayName("Correctly collect and summarize a negative integer input")
+    public void testNegativeCase()
+    {
         String negInput = "-19,-17,-15,-14,-13,-5,-1,0,1,3,5,7,8,9";
         String expectedNegResult = "-19, -17, -15--13, -5, -1-1, 3, 5, 7-9";
         assertEquals(expectedNegResult,sum.summarizeCollection(sum.collect(negInput)));

@@ -7,13 +7,18 @@ import java.util.List;
 
 public class Summarizer implements NumberRangeSummarizer
 {
+
+    /**
+     * Splits a comma separated string of integers into a collection of Integer objects.
+     *
+     * @param input Comma-separated String of numbers
+     * @return A Collection of Integers. Returns empty if input is null, invalid or empty.
+     */
     @Override
     public Collection<Integer> collect(String input)
     {
         if (input == null || input.isEmpty())
-        {
             return Collections.emptyList();
-        }
 
         String[] inputList = input.split(",");
         List<Integer> numberList = new LinkedList<>();
@@ -28,19 +33,23 @@ public class Summarizer implements NumberRangeSummarizer
                 System.out.println("Could not convert '" + num + "' to a valid integer. Proceeding without this value.");
             }
         }
-        Collections.sort(numberList);
         return numberList;
     }
 
+    /**
+     * Summarizes a collection of Integers, sorting and grouping any consecutive number as ranges, removes any duplicates.
+     *
+     * @param input A Collection of Integer objects
+     * @return A summarized String of comma-separated numbers including any ranges (example: 7, 9-11, 15)
+     */
     @Override
     public String summarizeCollection(Collection<Integer> input)
     {
         if(input == null || input.isEmpty())
-        {
             return "";
-        }
 
         List<Integer> inputList = new LinkedList<>(input);
+        Collections.sort(inputList);
         StringBuilder result = new StringBuilder();
         int floor;
 
@@ -57,16 +66,11 @@ public class Summarizer implements NumberRangeSummarizer
             }
 
             if (floor != curr)
-            {
                 result.append("-").append(curr);
-            }
 
             if (i < inputList.size() - 1)
-            {
                 result.append(", ");
-            }
         }
-
         return result.toString();
     }
 }
